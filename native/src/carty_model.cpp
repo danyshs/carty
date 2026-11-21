@@ -1,7 +1,7 @@
 /*
  * carty_model.cpp — Gemma 4 E2B model handle, the shared IN-PROCESS LiteRT-LM
  * decode driver, and the ROI text inference entry point (one of the carty_bridge
- * translation units;.
+ * translation units).
  *
  * This TU owns the model side of the seam: the session-scoped engine handle
  * (carty_model_load/free, which loads the 2.4 GB weights ONCE and holds the

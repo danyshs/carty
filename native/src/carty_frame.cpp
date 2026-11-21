@@ -1,6 +1,6 @@
 /*
  * carty_frame.cpp — bridge-owned video frame buffers (one of the carty_bridge
- * translation units;.
+ * translation units).
  *
  * Owns the multi-MB pixel-buffer surface Dart shares zero-copy via FFI: alloc,
  * the borrowed data/size accessors, and the single free that the Dart

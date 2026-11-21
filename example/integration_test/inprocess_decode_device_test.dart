@@ -1,4 +1,4 @@
-/// Integration test: the Phase-A on-device decode gate (A2).
+/// Integration test: the on-device decode gate.
 ///
 /// Proves a REAL Gemma 4 E2B decode runs FULLY IN-PROCESS on the arm64 device,
 /// through the exact production FFI seam the app uses

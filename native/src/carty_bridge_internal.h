@@ -116,7 +116,7 @@ struct CartyWorldGrid {
  * carty_model.cpp AND the ortho-fusion path in carty_bridge.cpp) so the single
  * proven decode recipe — generate_content + apply_prompt_template=false + the
  * model's own <|turn> markers (NOT the Conversation API, whose only accessor
- * returns a JSON envelope the bridge must not parse;) — lives in
+ * returns a JSON envelope the bridge must not parse) — lives in
  * exactly one place. Defined in carty_model.cpp. Returns bytes written incl NUL,
  * or a negative CARTY_INFER_* status (ENOMODEL if the resident engine is null /
  * the decode produced nothing; ENOSPACE if output_buf is too small) — never

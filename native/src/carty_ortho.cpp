@@ -1,6 +1,6 @@
 /*
  * carty_ortho.cpp — Geometric stage: orthorectification (one of the carty_bridge
- * translation units;.
+ * translation units).
  *
  * Turns a raw, oblique RGBA video frame into a stable top-down occupancy grid via
  * a planar (ground-plane Z=0) homography derived from CALIBRATED camera

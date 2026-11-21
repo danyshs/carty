@@ -13,7 +13,7 @@
 ///   Where "changed" includes add (absent in base) and delete (absent in side).
 ///
 /// Editing *different* nodes can never conflict — each id is decided in
-/// isolation — which is exactly the concurrent-branch case the Phase-3 test
+/// isolation — which is exactly the concurrent-branch case the merge test
 /// exercises. Same-id divergent edits surface as [MergeConflict]s rather than a
 /// silent last-writer-wins, because losing map data silently is worse than
 /// asking (no silent degradation).
