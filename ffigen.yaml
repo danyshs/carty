@@ -1,0 +1,49 @@
+# ffigen config — GENERATES lib/carty_bindings_generated.dart from the C ABI.
+#
+# Bindings are generated, never hand-edited. After any change to
+# native/include/carty_bridge.h, regenerate with:
+#
+#   dart run ffigen --config ffigen.yaml
+#
+# Requires LIBCLANG_PATH to point at a dir containing libclang.so (the Nix
+# devShell exports it).
+name: CartyBindings
+description: |
+  Dart FFI bindings for the Carty native bridge C ABI (carty_bridge.h).
+
+  GENERATED FILE — do not edit by hand. Regenerate with
+  `dart run ffigen --config ffigen.yaml`.
+output: 'lib/carty_bindings_generated.dart'
+headers:
+  entry-points:
+    - 'native/include/carty_bridge.h'
+  include-directives:
+    - '**carty_bridge.h'
+# Only bind our own surface; keep stdint/stddef noise out of the bindings.
+functions:
+  include:
+    - 'carty_.*'
+structs:
+  include:
+    - 'CartyFrame'
+    - 'CartyPose'        # typed geometry: a swapped pose/K is a Dart type error
+    - 'CartyIntrinsics'
+    - 'CartyGridShape'
+macros:
+  include:
+    - 'CARTY_FRAME_MAX_.*'
+    - 'CARTY_MAP_UPDATE_.*'
+    - 'CARTY_JSON_.*'
+    - 'CARTY_INFER_.*'
+    - 'CARTY_ORTHO_.*'    # ortho grid bounds (CARTY_ORTHO_DIM / MAX_DIM)
+    - 'CARTY_SPATIAL_.*'  # Spatial Context prompt bound
+    - 'CARTY_GRID_.*'     # fusion grid defaults + hard caps
+    - 'CARTY_FUSE_.*'     # accrete status codes (incl. SEEN_FULL)
+    - 'CARTY_VEC_.*'      # vectorize bounds + status codes
+    - 'CARTY_POSE_LEN'    # CartyPose's array length, so Dart copies exactly that many
+comments:
+  style: any
+  length: full
+preamble: |
+  // ignore_for_file: always_specify_types, camel_case_types, non_constant_identifier_names
+  // coverage:ignore-file

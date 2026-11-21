@@ -1,0 +1,65 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Local, writable SDK mirror dirs (vestigial from the old flake dev-shell;
+# the global toolchain provides Flutter/Android SDKs system-wide). Never commit.
+/.flutter-sdk/
+/.android-sdk/
+
+# `nix build` out-link (symlink into /nix/store); never commit it.
+/result
+/result-*
+
+# Flutter/Dart/Pub related
+# Libraries should not include pubspec.lock, per https://dart.dev/guides/libraries/private-files#pubspeclock.
+/pubspec.lock
+**/doc/api/
+.dart_tool/
+.flutter-plugins-dependencies
+/build/
+/coverage/
+
+# --- Generated build outputs (CMake/Ninja/Gradle) ---------------------------
+# Never tracked — regenerated artifacts, kept out of version control.
+/native/build/
+/native/build-asan/
+**/android/build/
+**/android/.gradle/
+**/android/.cxx/
+
+# Vendored LiteRT-LM C-ABI runtime binaries — large, rebuilt from pinned source.
+# The recipe + sha256 hashes live in litert-runtime/PROVENANCE.md (tracked), and
+# engine.h (the C ABI) is tracked; only the .so payloads are ignored.
+litert-runtime/lib/**/*.so
+
+# LLVM coverage raw profiles (generated when running instrumented native tests)
+*.profraw
+# clangd index
+native/.cache/
+# second build with OpenCV, so both Geometric-stage paths compile and test
+/native/build-opencv/
+# ./lint.sh configures its own two trees
+/native/build-lint/
+/native/build-lint-opencv/

@@ -1,0 +1,14 @@
+# tiger-style's C and C++ checks; ./lint.sh runs them over native/src and native/tests
+Checks: >
+  bugprone-*,
+  cert-*,
+  clang-analyzer-*,
+  misc-*,
+  readability-*,
+  google-readability-casting
+WarningsAsErrors: '*'
+# our headers only; OpenCV, LiteRT and the system headers belong to their own projects
+HeaderFilterRegex: '/native/(src|include|tests)/'
+CheckOptions:
+  readability-function-size.LineThreshold: '70'
+  bugprone-assert-side-effect.CheckFunctionCalls: 'true'
