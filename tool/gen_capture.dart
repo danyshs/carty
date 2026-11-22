@@ -79,8 +79,7 @@ List<WallSeg> boxTwoRoomWalls() {
 void main(List<String> args) {
   final dir = args.isNotEmpty ? args.first : _defaultDir;
   final n = generateCapture(dir);
-  // ignore: avoid_print
-  print('gen_capture: wrote $n keyframes to $dir');
+  stdout.writeln('gen_capture: wrote $n keyframes to $dir');
 }
 
 /// Writes the committed fixture into [dir] and returns the keyframe count.

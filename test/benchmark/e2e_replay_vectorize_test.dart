@@ -40,8 +40,7 @@ void main() {
     final f1 = roomDoorF1(pred, scene.truthMapGraph).f1;
 
     // Print the honest numbers so the ratchet step can read them.
-    // ignore: avoid_print
-    print('E2E box_two_room iou=$iou f1=$f1');
+    stdout.writeln('E2E box_two_room iou=$iou f1=$f1');
     expect(iou, greaterThanOrEqualTo(scene.iouFloor));
     expect(f1, greaterThanOrEqualTo(scene.f1Floor));
   }, timeout: const Timeout(Duration(minutes: 2)));

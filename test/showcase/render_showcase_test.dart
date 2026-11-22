@@ -61,8 +61,7 @@ void main() {
         c.drawPath(path, Paint()..color = colors[i % 4]..style = PaintingStyle.stroke..strokeWidth = 4);
       }
     }, size, '$out/vectorized_rooms.png');
-    // ignore: avoid_print
-    print('rooms=${rooms.length} truthRooms=${truth.length} bbox=$minX,$minY..$maxX,$maxY features=${feats.length}');
+    stdout.writeln('rooms=${rooms.length} truthRooms=${truth.length} bbox=$minX,$minY..$maxX,$maxY features=${feats.length}');
     grid.dispose();
   }, skip: Platform.environment['SHOWCASE_OUT'] == null ? 'set SHOWCASE_OUT to render' : null);
 }

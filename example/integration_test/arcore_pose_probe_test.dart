@@ -5,6 +5,7 @@
 ///   flutter test integration_test/arcore_pose_probe_test.dart --device-id DEVICE_ID
 library;
 
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -18,8 +19,7 @@ void main() {
     // First verify availability so we skip cleanly on non-AR devices.
     final availability =
         await channel.invokeMethod<String>('availability') ?? 'null';
-    // ignore: avoid_print
-    print('[Carty][test] ARCore availability: $availability');
+    debugPrint('[Carty][test] ARCore availability: $availability');
 
     if (!availability.startsWith('SUPPORTED')) {
       markTestSkipped('ARCore not supported/installed on this device ($availability)');
@@ -36,28 +36,24 @@ void main() {
     expect(raw, isNotNull);
     final snapshots =
         (raw ?? []).whereType<Map<Object?, Object?>>().toList();
-    // ignore: avoid_print
-    print('[Carty][test] pose probe: ${snapshots.length} snapshots');
+    debugPrint('[Carty][test] pose probe: ${snapshots.length} snapshots');
 
     expect(snapshots.length, equals(maxFrames),
         reason: 'expected $maxFrames snapshots from maxFrames=$maxFrames');
 
     // Examine tracking states.
     final states = snapshots.map((s) => s['trackingState'] as String?).toList();
-    // ignore: avoid_print
-    print('[Carty][test] tracking states: $states');
+    debugPrint('[Carty][test] tracking states: $states');
 
     final tracked = states.where((s) => s == 'TRACKING').length;
-    // ignore: avoid_print
-    print('[Carty][test] TRACKING frames: $tracked / ${snapshots.length}');
+    debugPrint('[Carty][test] TRACKING frames: $tracked / ${snapshots.length}');
 
     // At least one TRACKING frame is the gate — if all are INITIALIZING the
     // device needs more time to initialize ARCore (move it and retry).
     // We don't hard-fail here because the first session invocation may need to
     // warm up. The test logs the evidence and the caller decides.
     if (tracked == 0) {
-      // ignore: avoid_print
-      print('[Carty][test] WARNING: no TRACKING frames — ARCore initializing. '
+      debugPrint('[Carty][test] WARNING: no TRACKING frames — ARCore initializing. '
           'Move the device and retry.');
     } else {
       // Spot-check last snapshot fields.
@@ -67,8 +63,7 @@ void main() {
       expect(last['tz'], isA<double>());
       expect(last['qw'], isA<double>());
       expect(last['floorPlaneTracked'], isA<bool>());
-      // ignore: avoid_print
-      print('[Carty][test] last pose t=(${last['tx']}, ${last['ty']}, ${last['tz']}) '
+      debugPrint('[Carty][test] last pose t=(${last['tx']}, ${last['ty']}, ${last['tz']}) '
           'q=(${last['qx']}, ${last['qy']}, ${last['qz']}, ${last['qw']}) '
           'floor=${last['floorPlaneTracked']}');
     }

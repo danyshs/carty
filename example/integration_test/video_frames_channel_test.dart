@@ -13,6 +13,7 @@ library;
 
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:path_provider/path_provider.dart';
@@ -41,8 +42,7 @@ void main() {
     }
     const extractor = AndroidVideoFrameExtractor();
     final info = await extractor.probe(clipPath);
-    // ignore: avoid_print
-    print('[Carty][test] probe: ${info.width}x${info.height} '
+    debugPrint('[Carty][test] probe: ${info.width}x${info.height} '
         '@ ${info.frameRate.toStringAsFixed(2)}fps, '
         '${info.durationSeconds.toStringAsFixed(2)}s');
     expect(info.width, greaterThan(0));
@@ -78,8 +78,7 @@ void main() {
       expect(f.width, equals(targetW));
       expect(f.height, equals(targetH));
     }
-    // ignore: avoid_print
-    print('[Carty][test] got ${frames.length} frame(s); '
+    debugPrint('[Carty][test] got ${frames.length} frame(s); '
         'frame 0 RGBA[0..3]: '
         '${frames.first.rgba[0]},${frames.first.rgba[1]},'
         '${frames.first.rgba[2]},${frames.first.rgba[3]}');

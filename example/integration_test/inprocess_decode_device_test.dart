@@ -25,6 +25,7 @@ library;
 
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:path_provider/path_provider.dart';
@@ -89,16 +90,14 @@ void main() {
 
       final rssAfter = ProcessInfo.currentRss;
       const mib = 1024 * 1024;
-      // ignore: avoid_print
-      print('[Carty][gate-A2] bridge=${carty.version} '
+      debugPrint('[Carty][gate-A2] bridge=${carty.version} '
           'load=${loadWatch.elapsedMilliseconds}ms '
           'decode=${decodeWatch.elapsedMilliseconds}ms '
           'status=${inference.status} '
           'output=${inference.text.length}B '
           'rss=${rssBefore ~/ mib}->${rssAfter ~/ mib}MiB '
           '(delta=${(rssAfter - rssBefore) ~/ mib}MiB)');
-      // ignore: avoid_print
-      print('[Carty][gate-A2] decoded text (first 400B): '
+      debugPrint('[Carty][gate-A2] decoded text (first 400B): '
           '${inference.text.substring(0, inference.text.length.clamp(0, 400))}');
 
       // THE GATE: a real decode completed in-process on-device. status >= 0 means
